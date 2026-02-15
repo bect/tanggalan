@@ -1,0 +1,38 @@
+{
+  "name": "@bect/tanggalan",
+  "version": "1.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bect/tanggalan.git"
+  },
+  "description": "Pustaka lengkap untuk konversi Kalender Jawa.",
+  "main": "lib/tanggalan.js",
+  "files": [
+    "lib",
+    "ALGORITHM.md",
+    "API.md"
+  ],
+  "scripts": {
+    "build": "mkdir -p dist && terser lib/tanggalan.js -o dist/tanggalan.min.js --compress --mangle",
+    "build:pages": "mkdir -p pages/dist && esbuild pages/js/app.js --bundle --minify --outfile=pages/dist/bundle.min.js && esbuild pages/css/style.css --bundle --minify --outfile=pages/dist/style.min.css && sed 's|dist/||g' pages/index.html > pages/dist/index.html",
+    "test": "node test/functional.js",
+    "benchmark": "node benchmark/index.js",
+    "docs": "jsdoc -c jsdoc.json",
+    "docs:md": "jsdoc2md lib/tanggalan.js > API.md",
+    "preview": "npm run build:pages && npx serve pages/dist"
+  },
+  "keywords": [
+    "javanese", "calendar", "date", "weton", "primbon"
+  ],
+  "author": "bect",
+  "license": "ISC",
+  "devDependencies": {
+    "terser": "^5.31.0",
+    "esbuild": "^0.20.0",
+    "jsdoc": "^4.0.2",
+    "jsdoc-to-markdown": "^8.0.0"
+  }
+}
