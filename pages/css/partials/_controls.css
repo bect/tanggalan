@@ -1,0 +1,48 @@
+.controls {
+    background: var(--white);
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navigation span {
+    font-weight: bold;
+    min-width: 150px;
+    text-align: center;
+}
+
+/* Buttons */
+.btn, .btn-primary, button {
+    padding: 8px 16px;
+    border: 1px solid var(--border-color);
+    background: #f8f8f8;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn:hover, button:hover {
+    background: #e0e0e0;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background: #6d360f;
+}

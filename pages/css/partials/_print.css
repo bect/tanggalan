@@ -1,0 +1,34 @@
+/* Hidden by default on screen */
+.print-container {
+    display: none;
+}
+
+@media print {
+    @page {
+        size: 380mm 530mm;
+        margin: 0;
+    }
+
+    body {
+        background: white;
+        height: auto;
+        display: block;
+    }
+
+    /* Hide UI elements */
+    .no-print, .canvas-wrapper {
+        display: none !important;
+    }
+
+    /* Show Print Container */
+    .print-container {
+        display: block !important;
+    }
+
+    /* Page Break Logic */
+    .print-page {
+        width: 380mm;
+        height: 530mm;
+        page-break-after: always;
+    }
+}
