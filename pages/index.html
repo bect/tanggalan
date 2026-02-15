@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desain Tanggalan Jawa</title>
+    <link rel="stylesheet" href="dist/style.min.css">
+</head>
+<body>
+
+    <!-- Controls Section (Hidden during print) -->
+    <header class="controls no-print">
+        <div class="control-group">
+            <label for="yearInput">Tahun:</label>
+            <input type="number" id="yearInput" min="1900" max="2100">
+        </div>
+
+        <div class="control-group navigation">
+            <button id="prevPageBtn" title="Halaman Sebelumnya">&laquo;</button>
+            <span id="pageIndicator">Januari - Februari</span>
+            <button id="nextPageBtn" title="Halaman Selanjutnya">&raquo;</button>
+        </div>
+
+        <div class="control-group actions">
+            <label for="imageUpload" class="btn">Unggah Gambar</label>
+            <input type="file" id="imageUpload" accept="image/*" hidden>
+            <button id="printBtn" class="btn-primary">Cetak PDF</button>
+        </div>
+    </header>
+
+    <!-- Main Canvas (Visible for Design) -->
+    <main class="canvas-wrapper">
+        <canvas id="mainCanvas" width="2244" height="3130"></canvas>
+    </main>
+
+    <!-- Hidden Print Area (Populated only when printing) -->
+    <div id="printContainer" class="print-container"></div>
+
+    <!-- Scripts -->
+    <script src="dist/bundle.min.js"></script>
+</body>
+</html>

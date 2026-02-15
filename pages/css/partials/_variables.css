@@ -1,0 +1,18 @@
+:root {
+    /* Colors: Earthy Javanese Tones */
+    --primary-color: #8b4513;   /* SaddleBrown */
+    --secondary-color: #cd853f; /* Peru */
+    --accent-color: #d2691e;    /* Chocolate */
+    --bg-color: #fdf5e6;        /* OldLace */
+    --text-color: #333333;
+    --border-color: #cccccc;
+    --white: #ffffff;
+    --danger: #d9534f;          /* For Sundays/Holidays */
+
+    /* Fonts */
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-header: 'Georgia', serif;
+
+    /* Dimensions */
+    --spacing-md: 1rem;
+}

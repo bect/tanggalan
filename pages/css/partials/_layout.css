@@ -1,0 +1,17 @@
+/* Main Workspace */
+.canvas-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    overflow: auto;
+}
+
+/* The A4 Page Simulation */
+#mainCanvas {
+    width: 380mm;
+    height: 530mm;
+    background: var(--white);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
