@@ -66,6 +66,9 @@
         }
         .btn:hover { background: #0056b3; }
         .badge { display: inline-block; padding: 3px 7px; background: #6c757d; color: white; border-radius: 10px; font-size: 0.8em; margin-right: 5px; text-decoration: none; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9em; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
     </style>
 </head>
 <body>
@@ -88,29 +91,90 @@
             <p>Berikut adalah hasil eksekusi langsung dari pustaka ini di browser Anda.</p>
 
             <h3>1. Tanggal Saat Ini</h3>
-            <pre>const now = new Tanggalan();
-document.write(now.toString());</pre>
+            <pre>const Tanggalan = require('@bect/tanggalan');
+
+const now = new Tanggalan();
+console.log(now.toString());</pre>
             <div id="demo1" class="output">Loading...</div>
 
             <h3>2. Tanggal Tertentu</h3>
-            <pre id="code_manual">const specific = new Tanggalan(new Date(2022, 0, 1));
-document.write(specific.toString());</pre>
+            <pre id="code_manual">const Tanggalan = require('@bect/tanggalan');
+
+const specific = new Tanggalan(new Date(2022, 0, 1));
+console.log(specific.toString());</pre>
             <div id="demo_manual" class="output">Loading...</div>
 
             <h3>3. Parsing String</h3>
-            <pre>const t = Tanggalan.fromString("28 Jumadilawal 1955", "d M yyyy");
-document.write(t.getGregorianDate().toDateString());</pre>
+            <pre>const Tanggalan = require('@bect/tanggalan');
+
+const t = Tanggalan.fromString("28 Jumadilawal 1955", "d M yyyy");
+console.log(t.getGregorianDate().toDateString());</pre>
             <div id="demo2" class="output">Loading...</div>
 
             <h3>4. Mencari Weton Berikutnya</h3>
-            <pre>const next = new Tanggalan().wetonSabanjure("Senen Legi");
-document.write(next.toString());</pre>
+            <pre>const Tanggalan = require('@bect/tanggalan');
+
+const next = new Tanggalan().wetonSabanjure("Senen Legi");
+console.log(next.toString());</pre>
             <div id="demo3" class="output">Loading...</div>
 
             <h3>5. Format Kustom</h3>
-            <pre>const custom = new Tanggalan();
-document.write(custom.formatString("Dina: D, Pasaran: P, Mongso: MS"));</pre>
+            <pre>const Tanggalan = require('@bect/tanggalan');
+
+const custom = new Tanggalan();
+console.log(custom.formatString("Dina: D, Pasaran: P, Mongso: MS"));</pre>
             <div id="demo4" class="output">Loading...</div>
+
+            <h4>Token Format yang Tersedia</h4>
+            <table>
+                <thead><tr><th>Pola</th><th>Deskripsi</th><th>Contoh</th></tr></thead>
+                <tbody>
+                    <tr><td><code>D</code></td><td>Nama Hari (Dina)</td><td>Setu</td></tr>
+                    <tr><td><code>P</code></td><td>Pasaran</td><td>Pahing</td></tr>
+                    <tr><td><code>d</code></td><td>Tanggal (1-30)</td><td>26</td></tr>
+                    <tr><td><code>dd</code></td><td>Tanggal (01-30)</td><td>26</td></tr>
+                    <tr><td><code>M</code></td><td>Nama Bulan (Wulan)</td><td>Ruwah</td></tr>
+                    <tr><td><code>m</code></td><td>Nomor Bulan</td><td>8</td></tr>
+                    <tr><td><code>mm</code></td><td>Nomor Bulan (01-12)</td><td>08</td></tr>
+                    <tr><td><code>yyyy</code></td><td>Tahun (Jawa)</td><td>1959</td></tr>
+                    <tr><td><code>T</code></td><td>Nama Tahun Windu</td><td>Alip</td></tr>
+                    <tr><td><code>W</code></td><td>Wuku</td><td>Wukir</td></tr>
+                    <tr><td><code>N</code></td><td>Neptu</td><td>18</td></tr>
+                    <tr><td><code>MS</code></td><td>Mongso</td><td>Kasa</td></tr>
+                    <tr><td><code>WK</code></td><td>Wektu</td><td>Surup</td></tr>
+                    <tr><td><code>HH</code></td><td>Jam</td><td>14</td></tr>
+                    <tr><td><code>MM</code></td><td>Menit</td><td>30</td></tr>
+                    <tr><td><code>SS</code></td><td>Detik</td><td>00</td></tr>
+                    <tr><td><code>Z</code></td><td>Timezone Offset</td><td>+0700</td></tr>
+                </tbody>
+            </table>
+
+            <h2>Referensi API</h2>
+            <h3>Properti</h3>
+            <ul>
+                <li><code>dina</code>: String - Nama hari (misal: "Senen")</li>
+                <li><code>pasaran</code>: String - Nama pasaran (misal: "Wage")</li>
+                <li><code>wulan</code>: String - Nama bulan (misal: "Sura")</li>
+                <li><code>sasi</code>: String - Alias untuk <code>wulan</code></li>
+                <li><code>taun</code>: String - Nama tahun (misal: "Ehe")</li>
+                <li><code>wuku</code>: String - Nama wuku</li>
+                <li><code>mongso</code>: String - Nama mongso</li>
+                <li><code>wektu</code>: String - Waktu hari</li>
+            </ul>
+
+            <h3>Metode</h3>
+            <ul>
+                <li><code>getDate()</code>: Mengembalikan tanggal Jawa.</li>
+                <li><code>getDay()</code>: Mengembalikan indeks hari (0=Minggu, 6=Setu).</li>
+                <li><code>getMonth()</code>: Mengembalikan indeks bulan (0=Sura).</li>
+                <li><code>getFullYear()</code>: Mengembalikan tahun Jawa.</li>
+                <li><code>getPasaran()</code>: Mengembalikan indeks pasaran.</li>
+                <li><code>getNeptu()</code>: Mengembalikan total nilai neptu.</li>
+                <li><code>getWuku()</code>: Mengembalikan indeks wuku.</li>
+                <li><code>isKabisat()</code>: Mengembalikan <code>true</code> jika tahun kabisat.</li>
+                <li><code>wetonSabanjure(weton)</code>: Mengembalikan instance Tanggalan untuk weton berikutnya.</li>
+                <li><code>fromString(str, fmt)</code>: (Static) Membuat instance dari string.</li>
+            </ul>
 
             <h2>Preview/Demo Kalender</h2>
             <p>Demo <a href="./preview/">Aplikasi Kalender</a> ini digunakan untuk test manual selama pengembangan pustaka.</p>
@@ -143,7 +207,7 @@ document.write(custom.formatString("Dina: D, Pasaran: P, Mongso: MS"));</pre>
             const y = now.getFullYear();
             const m = now.getMonth();
             const d = now.getDate();
-            document.getElementById('code_manual').innerText = `const specific = new Tanggalan(new Date(${y}, ${m}, ${d}));\ndocument.write(specific.toString());`;
+            document.getElementById('code_manual').innerText = `const Tanggalan = require('@bect/tanggalan');\n\nconst specific = new Tanggalan(new Date(${y}, ${m}, ${d}));\nconsole.log(specific.toString());`;
             runDemo('demo_manual', () => new Tanggalan(new Date(y, m, d)).toString());
             
             runDemo('demo2', () => Tanggalan.fromString("28 Jumadilawal 1955", "d M yyyy").getGregorianDate().toDateString());
