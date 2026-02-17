@@ -4,12 +4,19 @@ Pustaka JavaScript lengkap untuk konversi Kalender Jawa. Mendukung Weton, Wuku, 
 
 ## Fitur
 
-- Konversi tanggal Masehi ke tanggal Jawa (Saka).
-- Menghitung **Pasaran** (Legi, Pahing, Pon, Wage, Kliwon).
-- Menghitung **Wuku** (siklus mingguan 30).
-- Menghitung **Mongso** (kalender pertanian matahari).
-- Menentukan **Neptu** (nilai numerik hari).
-- Menentukan **Wektu** (waktu tradisional, misal: "Surup", "Lingsir Wengi").
+- **Konversi Masehi ke Jawa**: Mengubah tanggal Gregorian menjadi penanggalan Jawa.
+- **Parsing String Jawa**: Membuat objek dari string (misal: "28 Jumadilawal 1955").
+- **Komponen Penanggalan**:
+  - **Pasaran**: Legi, Pahing, Pon, Wage, Kliwon.
+  - **Wuku**: 30 siklus mingguan (Sinta s.d. Watugunung).
+  - **Mongso**: Kalender musim/pertanian (Kasa s.d. Sada).
+  - **Neptu**: Nilai numerik gabungan hari dan pasaran.
+  - **Wektu**: Pembagian waktu tradisional (misal: "Surup", "Lingsir Wengi").
+- **Fitur Tambahan**:
+  - **Kabisat**: Deteksi tahun kabisat Jawa.
+  - **Weton Sabanjure**: Mencari tanggal terjadinya weton tertentu di masa depan.
+  - **Gregorian**: Akses mudah ke objek `Date` native.
+  - **Timezone**: Dukungan parsing dan formatting timezone offset.
 
 ## Instalasi
 
@@ -62,6 +69,10 @@ console.log(jd.formatString("D P, dd M yyyy"));
 | `N` | Neptu | 18 |
 | `MS` | Mongso | Kasa |
 | `WK` | Wektu | Surup |
+| `HH` | Jam | 14 |
+| `MM` | Menit | 30 |
+| `SS` | Detik | 00 |
+| `Z` | Timezone Offset | +0700 |
 
 ## Dokumentasi Teknis
 
@@ -93,6 +104,9 @@ Untuk dokumentasi teknis lengkap yang dihasilkan dari JSDoc, lihat [API.md](./AP
 - `getPasaran()`: Mengembalikan indeks pasaran.
 - `getNeptu()`: Mengembalikan total nilai neptu.
 - `getWuku()`: Mengembalikan indeks wuku.
+- `isKabisat()`: Mengembalikan `true` jika tahun kabisat.
+- `wetonSabanjure(weton)`: Mengembalikan instance Tanggalan untuk weton berikutnya.
+- `fromString(str, fmt)`: (Static) Membuat instance dari string.
 
 ## Showcase
 

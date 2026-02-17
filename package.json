@@ -17,9 +17,9 @@
   ],
   "scripts": {
     "build": "mkdir -p dist && terser lib/tanggalan.js -o dist/tanggalan.min.js --compress --mangle",
-    "build:pages": "mkdir -p pages/dist && esbuild pages/js/app.js --bundle --minify --outfile=pages/dist/bundle.min.js && esbuild pages/css/style.css --bundle --minify --outfile=pages/dist/style.min.css && sed 's|dist/||g' pages/index.html > pages/dist/index.html",
-    "test": "node test/functional.js",
-    "benchmark": "node benchmark/index.js",
+    "build:pages": "npm run build && mkdir -p pages/dist/preview/dist && cp dist/tanggalan.min.js pages/dist/ && cp pages/index.html pages/dist/index.html && cp pages/preview/index.html pages/dist/preview/index.html && esbuild pages/preview/js/app.js --bundle --minify --outfile=pages/dist/preview/dist/bundle.min.js && esbuild pages/preview/css/style.css --bundle --minify --outfile=pages/dist/preview/dist/style.min.css",
+    "test": "node test/functional.js && node test/pasaran_validation.js && node test/kabisat.js && node test/get_gregorian.js && node test/date_difference.js && node test/next_weton.js",
+    "benchmark": "node --expose-gc benchmark/index.js",
     "docs": "jsdoc -c jsdoc.json",
     "docs:md": "jsdoc2md lib/tanggalan.js > API.md",
     "preview": "npm run build:pages && npx serve pages/dist"
@@ -33,6 +33,7 @@
     "terser": "^5.31.0",
     "esbuild": "^0.20.0",
     "jsdoc": "^4.0.2",
-    "jsdoc-to-markdown": "^8.0.0"
+    "jsdoc-to-markdown": "^8.0.0",
+    "serve": "^14.2.4"
   }
 }
