@@ -1,6 +1,6 @@
 {
   "name": "@bect/tanggalan",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publishConfig": {
     "access": "public"
   },
@@ -25,7 +25,11 @@
     "preview": "npm run build:pages && npx serve pages/dist"
   },
   "keywords": [
-    "javanese", "calendar", "date", "weton", "primbon"
+    "javanese",
+    "calendar",
+    "date",
+    "weton",
+    "primbon"
   ],
   "author": "bect",
   "license": "ISC",
