@@ -3,40 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desain Tanggalan Jawa</title>
-    <link rel="stylesheet" href="dist/style.min.css">
+    <title>@bect/tanggalan - Pustaka Kalender Jawa</title>
+    <meta name="description" content="Pustaka JavaScript lengkap untuk konversi Kalender Jawa. Mendukung Weton, Wuku, Neptu, Mongso, dan Waktu Tradisional.">
+    <meta name="keywords" content="kalender jawa, weton, wuku, neptu, javascript library, penanggalan jawa, primbon">
+    <meta name="author" content="bect">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="@bect/tanggalan - Pustaka Kalender Jawa">
+    <meta property="og:description" content="Pustaka JavaScript lengkap untuk konversi Kalender Jawa. Mendukung Weton, Wuku, Neptu, Mongso, dan Waktu Tradisional.">
+    <style>
+        body {
+            background-color: #f9f9f9;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+        .page {
+            background: white;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        @media (max-width: 600px) {
+            .page {
+                padding: 20px;
+            }
+        }
+        h1 { border-bottom: 2px solid #333; padding-bottom: 10px; margin-top: 0; }
+        h2 { margin-top: 30px; color: #444; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        p { line-height: 1.6; color: #333; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; font-family: Consolas, monospace; color: #d63384; }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #e9ecef;
+            overflow-x: auto;
+            font-family: Consolas, monospace;
+            font-size: 14px;
+        }
+        .output {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            font-family: monospace;
+            color: #2e7d32;
+        }
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .btn:hover { background: #0056b3; }
+        .badge { display: inline-block; padding: 3px 7px; background: #6c757d; color: white; border-radius: 10px; font-size: 0.8em; margin-right: 5px; text-decoration: none; }
+    </style>
 </head>
 <body>
+    <div class="page">
+        <header>
+            <h1>@bect/tanggalan</h1>
+            <p>
+                Pustaka JavaScript lengkap untuk konversi Kalender Jawa. Mendukung Weton, Wuku, Neptu, Mongso (Solar), dan Waktu Tradisional (Wektu).
+            </p>
+            
+            <a href="https://github.com/bect/tanggalan" class="badge">GitHub</a>
+            <a href="https://www.npmjs.com/package/@bect/tanggalan" class="badge">NPM</a>
+        </header>
 
-    <!-- Controls Section (Hidden during print) -->
-    <header class="controls no-print">
-        <div class="control-group">
-            <label for="yearInput">Tahun:</label>
-            <input type="number" id="yearInput" min="1900" max="2100">
-        </div>
+        <main>
+            <h2>Instalasi</h2>
+            <pre>npm install @bect/tanggalan</pre>
 
-        <div class="control-group navigation">
-            <button id="prevPageBtn" title="Halaman Sebelumnya">&laquo;</button>
-            <span id="pageIndicator">Januari - Februari</span>
-            <button id="nextPageBtn" title="Halaman Selanjutnya">&raquo;</button>
-        </div>
+            <h2>Demo Kode</h2>
+            <p>Berikut adalah hasil eksekusi langsung dari pustaka ini di browser Anda.</p>
 
-        <div class="control-group actions">
-            <label for="imageUpload" class="btn">Unggah Gambar</label>
-            <input type="file" id="imageUpload" accept="image/*" hidden>
-            <button id="printBtn" class="btn-primary">Cetak PDF</button>
-        </div>
-    </header>
+            <h3>1. Tanggal Saat Ini</h3>
+            <pre>const now = new Tanggalan();
+document.write(now.toString());</pre>
+            <div id="demo1" class="output">Loading...</div>
 
-    <!-- Main Canvas (Visible for Design) -->
-    <main class="canvas-wrapper">
-        <canvas id="mainCanvas" width="2244" height="3130"></canvas>
-    </main>
+            <h3>2. Tanggal Tertentu</h3>
+            <pre id="code_manual">const specific = new Tanggalan(new Date(2022, 0, 1));
+document.write(specific.toString());</pre>
+            <div id="demo_manual" class="output">Loading...</div>
 
-    <!-- Hidden Print Area (Populated only when printing) -->
-    <div id="printContainer" class="print-container"></div>
+            <h3>3. Parsing String</h3>
+            <pre>const t = Tanggalan.fromString("28 Jumadilawal 1955", "d M yyyy");
+document.write(t.getGregorianDate().toDateString());</pre>
+            <div id="demo2" class="output">Loading...</div>
 
-    <!-- Scripts -->
-    <script src="dist/bundle.min.js"></script>
+            <h3>4. Mencari Weton Berikutnya</h3>
+            <pre>const next = new Tanggalan().wetonSabanjure("Senen Legi");
+document.write(next.toString());</pre>
+            <div id="demo3" class="output">Loading...</div>
+
+            <h3>5. Format Kustom</h3>
+            <pre>const custom = new Tanggalan();
+document.write(custom.formatString("Dina: D, Pasaran: P, Mongso: MS"));</pre>
+            <div id="demo4" class="output">Loading...</div>
+
+            <h2>Preview/Demo Kalender</h2>
+            <p>Demo <a href="./preview/">Aplikasi Kalender</a> ini digunakan untuk test manual selama pengembangan pustaka.</p>
+        </main>
+
+        <footer>
+            <div style="margin-top: 50px; text-align: center; font-size: 0.9em; color: #777; border-top: 1px solid #eee; padding-top: 20px;">
+                <a href="https://github.com/bect/tanggalan/blob/main/LICENSE.md" class="badge">ISC</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Load Library -->
+    <script src="tanggalan.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof Tanggalan === 'undefined') {
+                document.querySelectorAll('.output').forEach(el => el.innerHTML = "Error: Library not loaded.");
+                return;
+            }
+
+            const runDemo = (id, fn) => {
+                try { document.getElementById(id).innerText = "> " + fn(); } 
+                catch(e) { document.getElementById(id).innerText = "Error: " + e.message; }
+            };
+
+            runDemo('demo1', () => new Tanggalan().toString());
+            
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = now.getMonth();
+            const d = now.getDate();
+            document.getElementById('code_manual').innerText = `const specific = new Tanggalan(new Date(${y}, ${m}, ${d}));\ndocument.write(specific.toString());`;
+            runDemo('demo_manual', () => new Tanggalan(new Date(y, m, d)).toString());
+            
+            runDemo('demo2', () => Tanggalan.fromString("28 Jumadilawal 1955", "d M yyyy").getGregorianDate().toDateString());
+            runDemo('demo3', () => new Tanggalan().wetonSabanjure("Senen Legi").toString());
+            runDemo('demo4', () => new Tanggalan().formatString("Dina: D, Pasaran: P, Mongso: MS"));
+        });
+    </script>
 </body>
 </html>
