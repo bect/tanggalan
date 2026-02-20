@@ -81,6 +81,8 @@
             
             <a href="https://github.com/bect/tanggalan" class="badge">GitHub</a>
             <a href="https://www.npmjs.com/package/@bect/tanggalan" class="badge">NPM</a>
+            <a href="https://github.com/bect/tanggalan/blob/main/docs/PYTHON.md" class="badge">Python Docs</a>
+            <a href="https://github.com/bect/tanggalan/blob/main/docs/RUST.md" class="badge">Rust Docs</a>
         </header>
 
         <main>
@@ -177,7 +179,7 @@ console.log(custom.formatString("Dina: D, Pasaran: P, Mongso: MS"));</pre>
             </ul>
 
             <h2>Preview/Demo Kalender</h2>
-            <p>Demo <a href="./preview/">Aplikasi Kalender</a> ini digunakan untuk test manual selama pengembangan pustaka.</p>
+            <p>Demo <a href="./preview.html">Aplikasi Kalender</a> ini digunakan untuk test manual selama pengembangan pustaka.</p>
         </main>
 
         <footer>
@@ -188,32 +190,6 @@ console.log(custom.formatString("Dina: D, Pasaran: P, Mongso: MS"));</pre>
     </div>
 
     <!-- Load Library -->
-    <script src="tanggalan.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            if (typeof Tanggalan === 'undefined') {
-                document.querySelectorAll('.output').forEach(el => el.innerHTML = "Error: Library not loaded.");
-                return;
-            }
-
-            const runDemo = (id, fn) => {
-                try { document.getElementById(id).innerText = "> " + fn(); } 
-                catch(e) { document.getElementById(id).innerText = "Error: " + e.message; }
-            };
-
-            runDemo('demo1', () => new Tanggalan().toString());
-            
-            const now = new Date();
-            const y = now.getFullYear();
-            const m = now.getMonth();
-            const d = now.getDate();
-            document.getElementById('code_manual').innerText = `const Tanggalan = require('@bect/tanggalan');\n\nconst specific = new Tanggalan(new Date(${y}, ${m}, ${d}));\nconsole.log(specific.toString());`;
-            runDemo('demo_manual', () => new Tanggalan(new Date(y, m, d)).toString());
-            
-            runDemo('demo2', () => Tanggalan.fromString("28 Jumadilawal 1955", "d M yyyy").getGregorianDate().toDateString());
-            runDemo('demo3', () => new Tanggalan().wetonSabanjure("Senen Legi").toString());
-            runDemo('demo4', () => new Tanggalan().formatString("Dina: D, Pasaran: P, Mongso: MS"));
-        });
-    </script>
+    <script type="module" src="dist/demo.min.js"></script>
 </body>
 </html>

@@ -1,6 +1,5 @@
-# Tanggalan
-
-Pustaka JavaScript lengkap untuk konversi Kalender Jawa. Mendukung Weton, Wuku, Neptu, Mongso (Solar), dan Waktu Tradisional (Wektu).
+# Tanggalan (Rust)
+Pustaka JavaScript lengkap untuk konversi Kalender Jawa. Mendukung Weton, Wuku, Neptu, Mongso (Solar), dan Waktu Tradisional (Wektu). Mendukung target **Rust**, **WebAssembly (Node.js/Browser)**, dan **Python**.
 
 ## Fitur
 
@@ -20,26 +19,75 @@ Pustaka JavaScript lengkap untuk konversi Kalender Jawa. Mendukung Weton, Wuku, 
 
 ## Instalasi
 
+### 🦀 Rust (Cargo)
+
+Tambahkan ke `Cargo.toml`:
+
+```toml
+[dependencies]
+tanggalan = { git = "https://github.com/bect/tanggalan" }
+```
+
+### 📦 Node.js / Web (NPM)
+
 ```bash
 npm install @bect/tanggalan
 ```
 
+### 🐍 Python (PyPI)
+
+```bash
+pip install tanggalan
+```
+
 ## Penggunaan
 
-### Penggunaan Dasar
+### Rust
+
+```rust
+use tanggalan::core::JavaneseDate;
+use chrono::NaiveDate;
+
+fn main() {
+    // 17 Agustus 2023
+    let date = NaiveDate::from_ymd_opt(2023, 8, 17).unwrap()
+        .and_hms_opt(12, 0, 0).unwrap();
+    
+    let jd = JavaneseDate::new(date);
+    
+    println!("Hari: {}", jd.dina);       // Kemis
+    println!("Pasaran: {}", jd.pasaran); // Legi
+    println!("Lengkap: {}", jd);         // Kemis Legi, 29 Sura 1957 Ja, Bedhug
+}
+```
+
+### JavaScript / TypeScript
 
 ```javascript
-const Tanggalan = require('@bect/tanggalan');
+import { Tanggalan } from "@bect/tanggalan";
 
-// Gunakan tanggal saat ini
+// Tanggal saat ini
 const now = new Tanggalan();
 console.log(now.toString());
-// Contoh output: "Setu Pahing, 26 Ruwah 1959 Ja, Surup"
 
-// Gunakan tanggal tertentu
-const date = new Tanggalan(new Date('2023-08-17'));
-console.log(date.dina);    // "Kemis"
-console.log(date.pasaran); // "Legi"
+// Tanggal tertentu
+const date = new Tanggalan(new Date("2023-08-17"));
+console.log(`Weton: ${date.dina} ${date.pasaran}`); // Weton: Kemis Legi
+```
+
+### Python
+
+```python
+from tanggalan import Tanggalan
+from datetime import datetime
+
+# Tanggal saat ini
+now = Tanggalan()
+print(now)
+
+# Tanggal tertentu
+date = Tanggalan(datetime(2023, 8, 17))
+print(f"Weton: {date.dina} {date.pasaran}") # Weton: Kemis Legi
 ```
 
 ### Format Output
@@ -80,37 +128,7 @@ Ingin tahu bagaimana perhitungan matematis di balik kalender ini?
 
 Baca [Algoritma Perhitungan Kalender Jawa](./ALGORITHM.md).
 
-## Referensi API
-
-Untuk dokumentasi teknis lengkap yang dihasilkan dari JSDoc, lihat [API.md](./API.md).
-
-### Properti
-
-- `dina`: String - Nama hari (misal: "Senen")
-- `pasaran`: String - Nama pasaran (misal: "Wage")
-- `wulan`: String - Nama bulan (misal: "Sura")
-- `sasi`: String - Alias untuk `wulan`
-- `taun`: String - Nama tahun (misal: "Ehe")
-- `wuku`: String - Nama wuku
-- `mongso`: String - Nama mongso
-- `wektu`: String - Waktu hari
-
-### Metode
-
-- `getDate()`: Mengembalikan tanggal Jawa.
-- `getDay()`: Mengembalikan indeks hari (0=Minggu, 6=Setu).
-- `getMonth()`: Mengembalikan indeks bulan (0=Sura).
-- `getFullYear()`: Mengembalikan tahun Jawa.
-- `getPasaran()`: Mengembalikan indeks pasaran.
-- `getNeptu()`: Mengembalikan total nilai neptu.
-- `getWuku()`: Mengembalikan indeks wuku.
-- `isKabisat()`: Mengembalikan `true` jika tahun kabisat.
-- `wetonSabanjure(weton)`: Mengembalikan instance Tanggalan untuk weton berikutnya.
-- `fromString(str, fmt)`: (Static) Membuat instance dari string.
-
-## Showcase
-
-Lihat [Showcase](./SHOWCASE.md) untuk demo dan proyek yang menggunakan library ini.
+Untuk full dokumentasi penggunaan beserta detail api untuk [Python](./docs/PYTHON.md), [Node/Web](./docs/JS.md), dan [Rust](./docs/RUST.md) masing masing berada di folder [docs](./docs).
 
 ## Referensi
 
@@ -119,3 +137,7 @@ Lihat [Showcase](./SHOWCASE.md) untuk demo dan proyek yang menggunakan library i
 - [Sejarah Kalender Jawa dan Fungsi Kegunaan](https://percetakanku.co.id/sejarah-kalender-jawa-dan-fungsi-kegunaan/)
 - [Arane Wektu: Penyebutan Istilah Waktu dalam Bahasa Jawa](https://yogyakarta.kompas.com/read/2023/11/05/195150778/arane-wektu-penyebutan-istilah-waktu-dalam-bahasa-jawa?page=all)
 - [Penanggalan Jawa atau Kalender Jawa](https://www.nanokaryamandiri.com/campuran/penanggalan-jawa-atau-kalender-jawa)
+
+## Lisensi
+
+ISC

@@ -1,4 +1,4 @@
-import Tanggalan from '../../../../lib/tanggalan.js';
+import init, { Tanggalan } from '../../../pkg/web/tanggalan.js';
 
 export const MONTH_NAMES = [
     "Januari", "Februari", "Maret", "April", "Mei", "Juni",
@@ -11,3 +11,5 @@ export const DAYS_HEADER = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat
 export function getJavaneseDate(date) {
     return new Tanggalan(date);
 }
+
+export { init };

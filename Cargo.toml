@@ -1,0 +1,38 @@
+[package]
+name = "tanggalan"
+version = "1.0.1"
+edition = "2024"
+rust-version = "1.93"
+description = "Pustaka lengkap untuk konversi Kalender Jawa."
+repository = "https://github.com/bect/tanggalan"
+license = "ISC"
+authors = ["bect"]
+keywords = ["javanese", "calendar", "date", "weton", "primbon"]
+exclude = [
+    "pages",
+    "scripts",
+    ".github",
+    "tests/node_test.js",
+    "tests/python_test.py",
+    "package.json",
+    "package-lock.json",
+    "pyproject.toml",
+]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = []
+python = ["dep:pyo3"]
+wasm = ["dep:wasm-bindgen", "dep:js-sys"]
+
+[dependencies]
+chrono = "0.4"
+regex = "1.12"
+pyo3 = { version = "0.28", features = ["extension-module", "chrono"], optional = true }
+wasm-bindgen = { version = "0.2", optional = true }
+js-sys = { version = "0.3", optional = true }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"

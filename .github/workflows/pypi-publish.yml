@@ -1,0 +1,48 @@
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  # Build and publish wheels for Linux, macOS, and Windows
+  release:
+    name: Release
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          
+      - name: Build and publish
+        uses: PyO3/maturin-action@v1
+        with:
+          command: publish
+          args: --non-interactive --skip-existing --user __token__ --password ${{ secrets.PYPI_API_TOKEN }}
+
+  # Build and publish source distribution (sdist)
+  sdist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Build sdist
+        uses: PyO3/maturin-action@v1
+        with:
+          command: sdist
+          args: --out dist
+          
+      - name: Upload sdist
+        uses: PyO3/maturin-action@v1
+        with:
+          command: upload
+          args: --non-interactive --skip-existing --user __token__ --password ${{ secrets.PYPI_API_TOKEN }} dist/*
