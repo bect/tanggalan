@@ -20,15 +20,6 @@ Jika Anda menemukan kesalahan perhitungan atau masalah lain:
 6. Push ke branch (`git push origin fitur/NamaFiturKeren`).
 7. Buat **Pull Request** ke branch `main` repositori ini.
 
-### Demo dan Tutorial Eksternal
-
-Kontribusi berupa demo aplikasi atau tutorial yang dibuat di luar proyek ini (misalnya di repositori GitHub terpisah, blog pribadi, atau platform lain).
-
-Cara berkontribusi:
-1. Buat demo atau tutorial Anda.
-2. Tambahkan link dan deskripsi proyek Anda ke dalam file `SHOWCASE.md`.
-3. Kirimkan **Pull Request**.
-
 ## Panduan Pengembangan
 
 ### Persiapan Lingkungan

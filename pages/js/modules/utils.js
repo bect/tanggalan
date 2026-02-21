@@ -1,4 +1,4 @@
-import Tanggalan from '../../../../lib/tanggalan.js';
+import Tanggalan from '../../../lib/tanggalan.js';
 
 export const MONTH_NAMES = [
     "Januari", "Februari", "Maret", "April", "Mei", "Juni",

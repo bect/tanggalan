@@ -74,15 +74,9 @@ console.log(jd.formatString("D P, dd M yyyy"));
 | `SS` | Detik | 00 |
 | `Z` | Timezone Offset | +0700 |
 
-## Dokumentasi Teknis
-
-Ingin tahu bagaimana perhitungan matematis di balik kalender ini?
-
-Baca [Algoritma Perhitungan Kalender Jawa](./ALGORITHM.md).
-
 ## Referensi API
 
-Untuk dokumentasi teknis lengkap yang dihasilkan dari JSDoc, lihat [API.md](./API.md).
+Untuk dokumentasi perhitungan matematis, lihat [ALGORITHM.md](./ALGORITHM.md).
 
 ### Properti
 
@@ -107,10 +101,6 @@ Untuk dokumentasi teknis lengkap yang dihasilkan dari JSDoc, lihat [API.md](./AP
 - `isKabisat()`: Mengembalikan `true` jika tahun kabisat.
 - `wetonSabanjure(weton)`: Mengembalikan instance Tanggalan untuk weton berikutnya.
 - `fromString(str, fmt)`: (Static) Membuat instance dari string.
-
-## Showcase
-
-Lihat [Showcase](./SHOWCASE.md) untuk demo dan proyek yang menggunakan library ini.
 
 ## Referensi
 

@@ -7,6 +7,12 @@ const MARGIN = 100;
 const BINDING_HEIGHT = 70;
 const HOLE_RADIUS = 20;
 
+const HIJRI_MONTHS = [
+    "Muharram", "Safar", "Rabi' al-Awwal", "Rabi' al-Thani",
+    "Jumada al-Awwal", "Jumada al-Thani", "Rajab", "Sha'ban",
+    "Ramadan", "Shawwal", "Dhu al-Qi'dah", "Dhu al-Hijjah"
+];
+
 /**
  * Updates the visible design canvas based on current state
  */
@@ -130,14 +136,16 @@ function drawMonth(ctx, x, y, w, h, year, monthIndex) {
     ctx.fillText(`${year} ${MONTH_NAMES[monthIndex]}`, x + 20, y + headerHeight / 2);
 
     // Right: Hijri & Javanese Date Range
-    const hijriFormatter = new Intl.DateTimeFormat('id-ID-u-ca-islamic', { day: 'numeric', month: 'long', year: 'numeric' });
+    // Use numeric month + manual mapping to ensure Hijri names (mobile browsers often fallback to Gregorian names)
+    const hijriFormatter = new Intl.DateTimeFormat('id-ID-u-ca-islamic-nu-latn', { day: 'numeric', month: 'numeric', year: 'numeric' });
     const hStartParts = hijriFormatter.formatToParts(firstDay);
     const hEndParts = hijriFormatter.formatToParts(lastDay);
     
     const getVal = (parts, type) => parts.find(p => p.type === type).value;
+    const getHijriName = (m) => HIJRI_MONTHS[parseInt(m) - 1] || m;
     
-    const hStart = { d: getVal(hStartParts, 'day'), m: getVal(hStartParts, 'month'), y: getVal(hStartParts, 'year') };
-    const hEnd = { d: getVal(hEndParts, 'day'), m: getVal(hEndParts, 'month'), y: getVal(hEndParts, 'year') };
+    const hStart = { d: getVal(hStartParts, 'day'), m: getHijriName(getVal(hStartParts, 'month')), y: getVal(hStartParts, 'year') };
+    const hEnd = { d: getVal(hEndParts, 'day'), m: getHijriName(getVal(hEndParts, 'month')), y: getVal(hEndParts, 'year') };
     
     let hijriText = hStart.y === hEnd.y 
         ? `${hStart.d} ${hStart.m} - ${hEnd.d} ${hEnd.m} ${hStart.y}`
