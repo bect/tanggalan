@@ -91,7 +91,7 @@ if (fs.existsSync(path.join(rootDir, 'docs/JS.md'))) {
 
 // 6. Remove redundant README and LICENSE from subdirectories
 ['node', 'web'].forEach(sub => {
-    ['README.md', 'LICENSE'].forEach(file => {
+    ['README.md', 'LICENSE', '.gitignore'].forEach(file => {
         const filePath = path.join(pkgDir, sub, file);
         if (fs.existsSync(filePath)) {
             fs.unlinkSync(filePath);
