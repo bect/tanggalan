@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -13,6 +14,7 @@ jobs:
   release:
     name: Release
     runs-on: ${{ matrix.os }}
+    environment: publishing
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
@@ -27,14 +29,19 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           command: publish
-          args: --non-interactive --skip-existing --user __token__ --password ${{ secrets.PYPI_API_TOKEN }}
+          args: --non-interactive --skip-existing --username __token__ --password ${{ secrets.PYPI_API_TOKEN }}
 
   # Build and publish source distribution (sdist)
   sdist:
     runs-on: ubuntu-latest
+    environment: publishing
     steps:
       - uses: actions/checkout@v4
       
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
       - name: Build sdist
         uses: PyO3/maturin-action@v1
         with:
@@ -42,7 +49,5 @@ jobs:
           args: --out dist
           
       - name: Upload sdist
-        uses: PyO3/maturin-action@v1
-        with:
-          command: upload
-          args: --non-interactive --skip-existing --user __token__ --password ${{ secrets.PYPI_API_TOKEN }} dist/*
+        # Use 'run' to ensure shell expansion of 'dist/*' works correctly
+        run: maturin upload --non-interactive --skip-existing --username __token__ --password ${{ secrets.PYPI_API_TOKEN }} dist/*
