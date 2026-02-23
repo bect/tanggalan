@@ -2,8 +2,8 @@ name: Deploy static content to Pages
 
 on:
   push:
-    tags:
-      - 'js/v*'
+    branches:
+      - 'js'
   workflow_dispatch:
 
 permissions:
