@@ -1,0 +1,7 @@
+node_modules/
+dist/
+pages/dist/
+docs/api/
+pkg*
+target
+.venv

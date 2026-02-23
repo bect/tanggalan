@@ -1,0 +1,17 @@
+[package]
+name = "tanggalan"
+version = "1.1.1"
+edition = "2024"
+rust-version = "1.93"
+description = "Pustaka lengkap untuk konversi Kalender Jawa."
+repository = "https://github.com/bect/tanggalan"
+license = "ISC"
+authors = ["bect"]
+keywords = ["javanese", "calendar", "date", "weton", "primbon"]
+exclude = [
+    ".github",
+]
+
+[dependencies]
+chrono = "0.4"
+regex = "1.12"
