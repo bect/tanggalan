@@ -69,18 +69,137 @@
         table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9em; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
         th { background-color: #f2f2f2; }
+
+        /* Widget Styles */
+        .widget {
+            background: linear-gradient(135deg, #ffffff 0%, #f4f7f6 100%);
+            border: 1px solid #e1dfdd;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            position: relative;
+            text-align: center;
+            font-family: 'Segoe UI', sans-serif;
+            transition: all 0.2s ease;
+        }
+        .widget:hover {
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+            border-color: #d2d0ce;
+        }
+        .widget-gregorian {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0078d4;
+            cursor: pointer;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 15px;
+            background-color: #fff;
+            border: 1px solid #0078d4;
+            padding: 8px 24px;
+            border-radius: 20px;
+            transition: all 0.2s;
+        }
+        .widget-gregorian:hover {
+            background-color: #0078d4;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0,120,212,0.25);
+        }
+        .widget-today-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #605e5c;
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .widget-today-btn:hover {
+            background-color: #edebe9;
+            color: #201f1e;
+        }
+        .widget-javanese {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #201f1e;
+            margin: 0 0 8px 0;
+            line-height: 1.2;
+        }
+        .widget-detail {
+            font-size: 1rem;
+            color: #605e5c;
+            margin-bottom: 10px;
+        }
+        .widget-time {
+            font-size: 1.2rem;
+            color: #d2691e;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .widget-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .widget-link {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #f3f2f1;
+            color: #201f1e;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 2px;
+            transition: background-color 0.1s;
+        }
+        .widget-link:hover {
+            background-color: #edebe9;
+            color: #000;
+        }
+        #widgetDatePicker {
+            position: absolute;
+            top: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
     <div class="page">
         <header>
+            <!-- Date Widget -->
+            <div class="widget">
+                <button id="widgetTodayBtn" class="widget-today-btn" title="Kembali ke hari ini">Hari Ini</button>
+                <div class="widget-gregorian" id="widgetGregorian" title="Klik untuk ubah tanggal">Loading...</div>
+                <input type="date" id="widgetDatePicker">
+                <div class="widget-javanese" id="widgetJavanese"></div>
+                <div class="widget-detail" id="widgetDetail"></div>
+                <div class="widget-time" id="widgetTime"></div>
+                <div class="widget-links">
+                    <a href="https://github.com/bect/tanggalan" class="widget-link">GitHub</a>
+                    <a href="https://www.npmjs.com/package/@bect/tanggalan" class="widget-link">NPM</a>
+                    <a href="https://pypi.org/project/tanggalan/" class="widget-link">PyPI</a>
+                    <a href="https://crates.io/crates/tanggalan" class="widget-link">Crates.io</a>
+                </div>
+            </div>
+
             <h1>@bect/tanggalan</h1>
             <p>
                 Pustaka JavaScript lengkap untuk konversi Kalender Jawa. Mendukung Weton, Wuku, Neptu, Mongso (Solar), dan Waktu Tradisional (Wektu).
             </p>
-            
-            <a href="https://github.com/bect/tanggalan" class="badge">GitHub</a>
-            <a href="https://www.npmjs.com/package/@bect/tanggalan" class="badge">NPM</a>
         </header>
 
         <main>
@@ -213,6 +332,62 @@ console.log(custom.formatString("Dina: D, Pasaran: P, Mongso: MS"));</pre>
             runDemo('demo2', () => Tanggalan.fromString("28 Jumadilawal 1955", "d M yyyy").getGregorianDate().toDateString());
             runDemo('demo3', () => new Tanggalan().wetonSabanjure("Senen Legi").toString());
             runDemo('demo4', () => new Tanggalan().formatString("Dina: D, Pasaran: P, Mongso: MS"));
+
+            // Widget Logic
+            const widgetGregorian = document.getElementById('widgetGregorian');
+            const widgetJavanese = document.getElementById('widgetJavanese');
+            const widgetDetail = document.getElementById('widgetDetail');
+            const widgetTime = document.getElementById('widgetTime');
+            const widgetDatePicker = document.getElementById('widgetDatePicker');
+            const widgetTodayBtn = document.getElementById('widgetTodayBtn');
+
+            function updateWidget(date) {
+                const t = new Tanggalan(date);
+                
+                // Gregorian
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                widgetGregorian.textContent = date.toLocaleDateString('id-ID', options);
+                
+                // Javanese
+                widgetJavanese.textContent = `${t.dina} ${t.pasaran}, ${t.getDate()} ${t.wulan} ${t.getFullYear()}`;
+                
+                // Detail
+                widgetDetail.textContent = `Tahun ${t.taun} • Wuku ${t.wuku} • Mongso ${t.mongso}`;
+
+                // Sync picker
+                const yyyy = date.getFullYear();
+                const mm = String(date.getMonth() + 1).padStart(2, '0');
+                const dd = String(date.getDate()).padStart(2, '0');
+                widgetDatePicker.value = `${yyyy}-${mm}-${dd}`;
+            }
+
+            updateWidget(new Date());
+
+            function updateClock() {
+                const now = new Date();
+                const t = new Tanggalan(now);
+                widgetTime.textContent = `${now.toLocaleTimeString('id-ID')} • ${t.wektu}`;
+            }
+            setInterval(updateClock, 1000);
+            updateClock();
+
+            widgetGregorian.addEventListener('click', () => {
+                if (widgetDatePicker.showPicker) {
+                    widgetDatePicker.showPicker();
+                } else {
+                    widgetDatePicker.click(); // Fallback
+                }
+            });
+
+            widgetDatePicker.addEventListener('change', (e) => {
+                if (e.target.value) {
+                    updateWidget(new Date(e.target.value));
+                }
+            });
+
+            widgetTodayBtn.addEventListener('click', () => {
+                updateWidget(new Date());
+            });
         });
     </script>
 </body>
