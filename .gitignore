@@ -1,0 +1,23 @@
+node_modules/
+dist/
+pages/dist/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/

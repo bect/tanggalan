@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tanggalan"
+version = "1.1.2"
+description = "A comprehensive library for Javanese Calendar conversion."
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "ISC"}
+authors = [
+    {name = "bect"}
+]
+[project.optional-dependencies]
+test = ["pytest"]
+
+keywords = ["javanese", "calendar", "date", "weton", "primbon"]
+
+[project.urls]
+Homepage = "https://github.com/bect/tanggalan/tree/python"
+Repository = "https://github.com/bect/tanggalan/tree/python"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.setuptools]
+packages = ["tanggalan"]
+
+[tool.setuptools.package-dir]
+tanggalan = "."
