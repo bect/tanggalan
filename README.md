@@ -1,6 +1,6 @@
-# Dokumentasi Penggunaan Rust
+# Tanggalan
 
-Pustaka `tanggalan` menyediakan API Rust murni untuk perhitungan kalender Jawa.
+Pustaka Rust lengkap untuk konversi Kalender Jawa. Mendukung Weton, Wuku, Neptu, Mongso (Solar), dan Waktu Tradisional (Wektu).
 
 ## Instalasi
 
@@ -8,7 +8,7 @@ Tambahkan dependensi berikut ke `Cargo.toml` Anda:
 
 ```toml
 [dependencies]
-tanggalan = "1.1.1"
+tanggalan = "1.1.2"
 chrono = "0.4"
 ```
 
@@ -163,9 +163,9 @@ Di Rust, sebagian besar "getter" diimplementasikan sebagai public field untuk ef
 
 Ingin tahu bagaimana perhitungan matematis di balik kalender ini?
 
-Baca [Algoritma Perhitungan Kalender Jawa](./ALGORITHM.md).
+Baca [Algoritma Perhitungan Kalender Jawa](https://github.com/bect/tanggalan/blob/js/ALGORITHM.md).
 
-Untuk full dokumentasi penggunaan beserta detail api untuk [Python](./docs/PYTHON.md), [Node/Web](./docs/JS.md), dan [Rust](./docs/RUST.md) masing masing berada di folder [docs](./docs).
+Untuk dokumentasi penggunaan versi lain, lihat [Python](https://github.com/bect/tanggalan/blob/python/README.md), [Node/Web](https://github.com/bect/tanggalan/blob/js/README.md), dan [Go](https://github.com/bect/tanggalan/blob/main/README.md).
 
 ## Referensi
 
