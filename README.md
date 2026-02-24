@@ -20,8 +20,19 @@ Pustaka JavaScript lengkap untuk konversi Kalender Jawa. Mendukung Weton, Wuku, 
 
 ## Instalasi
 
+### NPM
+
 ```bash
 npm install @bect/tanggalan
+```
+
+### Browser (Tanpa Instalasi)
+
+```html
+<script type="module">
+  import Tanggalan from "https://esm.sh/@bect/tanggalan";
+  window.Tanggalan = Tanggalan; // tunggu pustaka dimuat sebelum digunakan
+</script>
 ```
 
 ## Penggunaan
